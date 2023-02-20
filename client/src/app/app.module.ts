@@ -8,6 +8,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatOptionModule } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -31,10 +32,12 @@ import { UserCardComponent } from './users/user-card.component';
 import { UserListComponent } from './users/user-list.component';
 import { UserProfileComponent } from './users/user-profile.component';
 import { UserService } from './users/user.service';
+import { TodoCardComponent } from './todo/todo-card/todo-card.component';
 
 const MATERIAL_MODULES: any[] = [
   MatButtonModule,
   MatCardModule,
+  MatCheckboxModule,
   MatDividerModule,
   MatExpansionModule,
   MatFormFieldModule,
@@ -59,6 +62,7 @@ const MATERIAL_MODULES: any[] = [
     UserCardComponent,
     UserProfileComponent,
     AddUserComponent,
+    TodoCardComponent,
   ],
   imports: [
     BrowserModule,
