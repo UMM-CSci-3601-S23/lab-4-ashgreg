@@ -1,1 +1,3 @@
-<p>todo-list works!</p>
+<div>
+  <app-todo-card *ngFor="let todo of filteredTodos" class="todo-card" [todo]="todo" fxFlex="1 1 280px"></app-todo-card>
+</div>

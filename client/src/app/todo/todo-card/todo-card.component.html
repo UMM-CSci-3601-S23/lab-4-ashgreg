@@ -1,5 +1,5 @@
 <mat-card class="todo-card" *ngIf="this.todo">
-  <mat-checkbox class="example-margin" [(ngModel)]="this.todo.status" class="todo-card-check">
+  <mat-checkbox ngDefaultControl class="example-margin" [(ngModel)]="this.todo.status" (ngModelChange)="clicked" class="todo-card-check">
     <mat-card-header class="todo-card-header">
         <mat-card-title class="todo-card-category">{{ this.todo.category }}</mat-card-title>
         <mat-card-subtitle class="todo-card-owner">{{ this.todo.owner }}</mat-card-subtitle>
