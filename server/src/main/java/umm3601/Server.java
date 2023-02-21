@@ -67,7 +67,7 @@ public class Server {
     server.get("/api/users", userController::getUsers);
 
     // List todos, filtered using query params
-    server.get( "/api/todos", todoController::getTodos);
+    server.get("/api/todos", todoController::getTodos);
 
     // Get the specified user
     server.get("/api/users/{id}", userController::getUser);
