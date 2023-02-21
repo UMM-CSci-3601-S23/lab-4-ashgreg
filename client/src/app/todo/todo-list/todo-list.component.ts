@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Subject, takeUntil } from 'rxjs';
+import { max, Subject, takeUntil } from 'rxjs';
 import { Todo } from '../todo';
 import { TodoService } from '../todo.service';
 
@@ -15,7 +15,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
   public filteredTodos: Todo[];
 
   // Filters:
-  public todoOwner: string;
+  public todoOwner = '';
   public todoCategory: string;
   public maxResponseLimit: number;
   public todoBody: string;
@@ -39,7 +39,8 @@ export class TodoListComponent implements OnInit, OnDestroy {
   }
 
   public updateFilter(): void {
-    this.filteredTodos = this.serverFilteredTodos;
+    this.filteredTodos = this.todoService.filterTodos(
+      this.serverFilteredTodos, { limit: this.maxResponseLimit });
   }
 
   /**
