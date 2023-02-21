@@ -127,4 +127,18 @@ describe('TodoService', () => {
         });
     });
   });
+
+  describe('Filtering on the client using `filterTodos()` (Angular/Client filtering)', () => {
+    it('restricts output count', () => {
+      const filteredUsers = todoService.filterTodos(testTodos, { limit: 1 });
+      // There should be only one todos returned
+      expect(filteredUsers.length).toBe(1);
+    });
+
+    it('restricts output count', () => {
+      const filteredUsers = todoService.filterTodos(testTodos, { limit: 2 });
+      // There should be only two todos returned
+      expect(filteredUsers.length).toBe(2);
+    });
+  });
 });
