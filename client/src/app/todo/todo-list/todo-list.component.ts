@@ -14,6 +14,14 @@ export class TodoListComponent implements OnInit, OnDestroy {
   public serverFilteredTodos: Todo[];
   public filteredTodos: Todo[];
 
+  // Filters:
+  public todoOwner: string;
+  public todoCategory: string;
+  public maxResponseLimit: number;
+  public todoBody: string;
+  public statusFilter = 'all';
+
+
   private ngUnsubscribe = new Subject<void>();
 
   constructor(private todoService: TodoService, private snackBar: MatSnackBar) {
