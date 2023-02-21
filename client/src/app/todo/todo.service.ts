@@ -27,10 +27,15 @@ export class TodoService {
   /**
    * Get a dummy list of todos from the server to test the front-end
    */
-  getTodos(): Observable<Todo[]> {
-    // TODO: In the future this will change to a 'let' because we will be
-    // adding the filter at a later date
-    const httpParams: HttpParams = new HttpParams();
+  getTodos(filters?: { name?: string }): Observable<Todo[]> {
+    let httpParams: HttpParams = new HttpParams();
+
+    if (filters) {
+      if(filters.hasOwnProperty('name')) {
+        httpParams = httpParams.set('owner', filters.name);
+      }
+    }
+
 
     return this.httpClient.get<Todo[]>(this.todoUrl, { params: httpParams });
   }
