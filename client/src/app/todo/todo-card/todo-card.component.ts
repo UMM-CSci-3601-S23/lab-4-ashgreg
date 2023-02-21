@@ -11,4 +11,8 @@ export class TodoCardComponent {
 
   constructor() {
   }
+
+  clicked(): void {
+
+  }
 }
