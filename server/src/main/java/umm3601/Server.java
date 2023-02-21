@@ -13,6 +13,7 @@ import org.bson.UuidRepresentation;
 import io.javalin.Javalin;
 import io.javalin.plugin.bundled.RouteOverviewPlugin;
 import io.javalin.http.InternalServerErrorResponse;
+import umm3601.todo.TodoController;
 import umm3601.user.UserController;
 
 public class Server {
@@ -42,6 +43,7 @@ public class Server {
 
     // Initialize dependencies
     UserController userController = new UserController(database);
+    TodoController todoController = new TodoController(database);
 
     Javalin server = Javalin.create(config ->
       config.plugins.register(new RouteOverviewPlugin("/api"))
@@ -63,6 +65,9 @@ public class Server {
 
     // List users, filtered using query parameters
     server.get("/api/users", userController::getUsers);
+
+    // List todos, filtered using query params
+    server.get( "/api/todos", todoController::getTodos);
 
     // Get the specified user
     server.get("/api/users/{id}", userController::getUser);
