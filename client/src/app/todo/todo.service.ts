@@ -39,4 +39,14 @@ export class TodoService {
 
     return this.httpClient.get<Todo[]>(this.todoUrl, { params: httpParams });
   }
+
+  filterTodos(todos: Todo[], filters: { limit?: number }): Todo[] {
+    let filteredTodos = todos;
+
+    if (filters.limit) {
+      filteredTodos = filteredTodos.slice(0, filters.limit);
+    }
+
+    return filteredTodos;
+  }
 }
