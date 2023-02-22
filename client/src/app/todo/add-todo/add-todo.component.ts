@@ -100,14 +100,20 @@ export class AddTodoComponent implements OnInit{
   }
 
   submitForm() {
-    this.todoService.addTodo(this.addTodoForm.value).subscribe({
+    // ESLint was encouraging this to be a const, which while technically
+    // correct, gives the wrong impression of the point of creating this
+    // variable,so it is overridden for the sake of readability.
+    // eslint-disable-next-line prefer-const
+    let todo = this.addTodoForm.value;
+    todo.status = false;
+
+    this.todoService.addTodo(todo).subscribe({
       next: (newID) => {
         this.snackBar.open(
-          `Added todo ${this.addTodoForm.value.name}`,
+          `Added todo for ${this.addTodoForm.value.owner}`,
           null,
           { duration: 2000 }
         );
-        this.router.navigate(['/todos/', newID]);
       },
       error: err => {
         this.snackBar.open(
