@@ -27,7 +27,7 @@ export class TodoService {
   /**
    * Get a dummy list of todos from the server to test the front-end
    */
-  getTodos(filters?: { name?: string }): Observable<Todo[]> {
+  getTodos(filters?: { name?: string }, sortBy?: string): Observable<Todo[]> {
     let httpParams: HttpParams = new HttpParams();
 
     if (filters) {
@@ -36,6 +36,9 @@ export class TodoService {
       }
     }
 
+    if (sortBy) {
+      httpParams = httpParams.set('sortby', sortBy);
+    }
 
     return this.httpClient.get<Todo[]>(this.todoUrl, { params: httpParams });
   }

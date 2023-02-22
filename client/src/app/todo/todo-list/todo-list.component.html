@@ -50,6 +50,23 @@
             <mat-radio-button value="todo">Todo</mat-radio-button>
           </mat-radio-group>
         </div>
+
+        <div class="flex-row gap-10 flex-wrap">
+          <mat-form-field class="input-field">
+            <mat-label>Sort By</mat-label>
+            <mat-select (selectionChange)="getTodosFromServer()" [(ngModel)]="sortBy" data-test="sortBy">
+              <mat-option>--</mat-option>
+              <mat-option value="body">Body</mat-option>
+              <mat-option value="category">Category</mat-option>
+              <mat-option value="status">Status</mat-option>
+              <mat-option value="owner">Owner</mat-option>
+            </mat-select>
+            <mat-hint>Filtered on Server</mat-hint>
+          </mat-form-field>
+          <mat-slide-toggle [(ngModel)]="reverseSort" data-test="reverseSort" (toggleChange)="getTodosFromServer()">
+            Reverse Sort
+          </mat-slide-toggle>
+        </div>
       </mat-card-content>
     </mat-card>
   </div>

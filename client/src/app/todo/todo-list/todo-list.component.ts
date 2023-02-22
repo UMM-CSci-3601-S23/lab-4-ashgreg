@@ -20,6 +20,8 @@ export class TodoListComponent implements OnInit, OnDestroy {
   public maxResponseLimit: number;
   public todoBody: string;
   public statusFilter = 'all';
+  public sortBy: string;
+  public reverseSort = false;
 
 
   private ngUnsubscribe = new Subject<void>();
@@ -29,9 +31,13 @@ export class TodoListComponent implements OnInit, OnDestroy {
   }
 
   getTodosFromServer(): void {
-    this.todoService.getTodos( { name: this.todoOwner } ).pipe(takeUntil(this.ngUnsubscribe)).subscribe({
+    this.todoService.getTodos( { name: this.todoOwner }, this.sortBy ).pipe(takeUntil(this.ngUnsubscribe)).subscribe({
       next: (returnedTodos) => {
         this.serverFilteredTodos = returnedTodos;
+
+        if (this.reverseSort) {
+          this.serverFilteredTodos = this.serverFilteredTodos.reverse();
+        }
 
         this.updateFilter();
       }
