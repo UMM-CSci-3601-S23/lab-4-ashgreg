@@ -35,6 +35,10 @@ export class TodoListComponent implements OnInit, OnDestroy {
       next: (returnedTodos) => {
         this.serverFilteredTodos = returnedTodos;
 
+        if (this.reverseSort) {
+          this.serverFilteredTodos = this.serverFilteredTodos.reverse();
+        }
+
         this.updateFilter();
       }
     });
