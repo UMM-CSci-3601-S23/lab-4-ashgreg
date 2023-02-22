@@ -40,7 +40,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
 
   public updateFilter(): void {
     this.filteredTodos = this.todoService.filterTodos(
-      this.serverFilteredTodos, { limit: this.maxResponseLimit });
+      this.serverFilteredTodos, { limit: this.maxResponseLimit, body: this.todoBody });
   }
 
   /**
