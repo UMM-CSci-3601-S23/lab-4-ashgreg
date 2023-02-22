@@ -151,5 +151,25 @@ describe('TodoService', () => {
         expect(todo.body.indexOf(contentString)).toBeGreaterThanOrEqual(0);
       });
     });
+
+    it('filters by complete', () => {
+      const filteredTodos = todoService.filterTodos(testTodos, { status: 'complete' });
+      // There should be just one user that has UMM as their company.
+      expect(filteredTodos.length).toBe(1);
+      // Every returned user's company should contain 'UMM'.
+      filteredTodos.forEach(todo => {
+        expect(todo.status).toBeTrue();
+      });
+    });
+
+    it('filters by incomplete', () => {
+      const filteredTodos = todoService.filterTodos(testTodos, { status: 'todo' });
+      // There should be just one user that has UMM as their company.
+      expect(filteredTodos.length).toBe(2);
+      // Every returned user's company should contain 'UMM'.
+      filteredTodos.forEach(todo => {
+        expect(todo.status).toBeFalse();
+      });
+    });
   });
 });
