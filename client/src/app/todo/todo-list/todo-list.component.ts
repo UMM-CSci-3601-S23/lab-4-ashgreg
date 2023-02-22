@@ -20,6 +20,8 @@ export class TodoListComponent implements OnInit, OnDestroy {
   public maxResponseLimit: number;
   public todoBody: string;
   public statusFilter = 'all';
+  public sortBy: string;
+  public reverseSort = false;
 
 
   private ngUnsubscribe = new Subject<void>();
