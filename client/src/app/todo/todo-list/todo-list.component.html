@@ -44,7 +44,7 @@
 
         <div class="flex-row gap-10 flex-wrap">
           <label>Display: </label>
-          <mat-radio-group aria-label="Status Filter" [(ngModel)]="statusFilter" data-test="statusFilter" (input)="updateFilter()">
+          <mat-radio-group aria-label="Status Filter" [(ngModel)]="statusFilter" data-test="statusFilter" (change)="updateFilter()">
             <mat-radio-button value="all">All</mat-radio-button>
             <mat-radio-button value="complete">Complete</mat-radio-button>
             <mat-radio-button value="todo">Todo</mat-radio-button>
