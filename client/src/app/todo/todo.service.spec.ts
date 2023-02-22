@@ -140,5 +140,16 @@ describe('TodoService', () => {
       // There should be only two todos returned
       expect(filteredUsers.length).toBe(2);
     });
+
+    it('filters by body contents', () => {
+      const contentString = 'laborum';
+      const filteredTodos = todoService.filterTodos(testTodos, { body: contentString });
+      // There should be just one user that has UMM as their company.
+      expect(filteredTodos.length).toBe(2);
+      // Every returned user's company should contain 'UMM'.
+      filteredTodos.forEach(todo => {
+        expect(todo.body.indexOf(contentString)).toBeGreaterThanOrEqual(0);
+      });
+    });
   });
 });

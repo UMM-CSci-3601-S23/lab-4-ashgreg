@@ -40,11 +40,14 @@ export class TodoService {
     return this.httpClient.get<Todo[]>(this.todoUrl, { params: httpParams });
   }
 
-  filterTodos(todos: Todo[], filters: { limit?: number }): Todo[] {
+  filterTodos(todos: Todo[], filters: { limit?: number; body?: string }): Todo[] {
     let filteredTodos = todos;
 
     if (filters.limit) {
       filteredTodos = filteredTodos.slice(0, filters.limit);
+    }
+    if (filters.body) {
+      filteredTodos = filteredTodos.filter(todo => todo.body.toLowerCase().indexOf(filters.body.toLowerCase()) !== -1);
     }
 
     return filteredTodos;
