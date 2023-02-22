@@ -110,21 +110,21 @@ public class TodoControllerSpec {
         new Document()
             .append("owner", "Blanche")
             .append("status", false)
-            .append("body", "In sunt ex non tempor cillum commodo amet incididunt anim qui commodo quis. Cillum non labore ex sint esse.")
+            .append("body", "In sunt ex non tempor cillum commodo amet incididunt anim qui")
             .append("category", "software design"));
 
     testTodos.add(
       new Document()
           .append("owner", "Fry")
           .append("status", false)
-          .append("body", "Ipsum esse est ullamco magna tempor anim laborum non officia deserunt veniam commodo. Aute minim incididunt ex commodo.")
+          .append("body", "Ipsum esse est ullamco magna tempor anim laborum non officia ")
           .append("category", "video games"));
 
     testTodos.add(
       new Document()
           .append("owner", "Fry")
           .append("status", true)
-          .append("body", "Ullamco irure laborum magna dolor non. Anim occaecat adipisicing cillum eu magna in.")
+          .append("body", "Ullamco irure laborum magna dolor non. Anim occaecat adipisicing")
           .append("category", "homework"));
 
 
