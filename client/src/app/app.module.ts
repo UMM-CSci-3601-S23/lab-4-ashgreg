@@ -35,6 +35,7 @@ import { UserService } from './users/user.service';
 import { TodoCardComponent } from './todo/todo-card/todo-card.component';
 import { TodoListComponent } from './todo/todo-list/todo-list.component';
 import { CommonModule } from '@angular/common';
+import { AddTodoComponent } from './todo/add-todo/add-todo.component';
 
 const MATERIAL_MODULES: any[] = [
   MatButtonModule,
@@ -67,6 +68,7 @@ const MATERIAL_MODULES: any[] = [
     AddUserComponent,
     TodoCardComponent,
     TodoListComponent,
+    AddTodoComponent,
   ],
   imports: [
     BrowserModule,

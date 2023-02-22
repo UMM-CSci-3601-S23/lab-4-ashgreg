@@ -11,8 +11,8 @@ import { TodoService } from '../todo.service';
   styleUrls: ['./todo-list.component.scss']
 })
 export class TodoListComponent implements OnInit, OnDestroy {
-  public serverFilteredTodos: Todo[];
-  public filteredTodos: Todo[];
+  public serverFilteredTodos: Todo[] = [];
+  public filteredTodos: Todo[] = [];
 
   // Filters:
   public todoOwner = '';

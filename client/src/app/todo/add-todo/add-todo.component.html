@@ -1,0 +1,67 @@
+<div class="flex-1" fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10">
+  <mat-card appearance="outlined" class="search-card">
+    <mat-card-title class="todo-list-title">Add New Todo</mat-card-title>
+    <form [formGroup]="addTodoForm" (ngSubmit)="submitForm();">
+    <mat-card-content class="flex-col" >
+
+
+
+
+    <div class="flex-row gap-10 flex-wrap">
+      <mat-form-field  class="input-field">
+        <mat-label>Owner</mat-label>
+        <input matInput placeholder="Name" formControlName="owner"
+              required>
+
+        <mat-error *ngFor="let validation of addTodoValidationMessages.owner">
+          <mat-error class="error-message" data-test="ownerError"
+                    *ngIf="addTodoForm.get('owner').hasError(validation.type) && (addTodoForm.get('owner').dirty || addTodoForm.get('owner').touched)">
+            {{validation.message}}
+          </mat-error>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field  class="input-field">
+        <mat-label>Body</mat-label>
+        <input matInput placeholder="TODO Body" formControlName="body"
+        required>
+
+        <mat-error *ngFor="let validation of addTodoValidationMessages.body">
+          <mat-error class="error-message" data-test="bodyError"
+                    *ngIf="addTodoForm.get('body').hasError(validation.type) && (addTodoForm.get('body').dirty || addTodoForm.get('body').touched)">
+            {{validation.message}}
+          </mat-error>
+        </mat-error>
+      </mat-form-field>
+      </div>
+
+      <div class="flex-row gap-10 flex-wrap">
+        <mat-form-field  class="input-field">
+          <mat-label>Category</mat-label>
+          <input matInput placeholder="Category" formControlName="category"
+          required>
+
+          <mat-error *ngFor="let validation of addTodoValidationMessages.body">
+            <mat-error class="error-message" data-test="bodyError"
+                      *ngIf="addTodoForm.get('body').hasError(validation.type) && (addTodoForm.get('body').dirty || addTodoForm.get('body').touched)">
+              {{validation.message}}
+            </mat-error>
+          </mat-error>
+        </mat-form-field>
+        <mat-card-actions align="start">
+        <button
+          mat-button
+          type="button"
+          color="primary"
+
+          type="submit"
+          data-test="confirmAddTodoButton">
+          ADD TODO
+      </button>
+    </mat-card-actions>
+
+      </div>
+    </mat-card-content>
+  </form>
+  </mat-card>
+</div>

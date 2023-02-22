@@ -54,59 +54,7 @@
       </mat-card>
     </div>
   </div>
-
-  <div class="flex-1" fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10">
-    <mat-card appearance="outlined" class="search-card">
-      <mat-card-title class="todo-list-title">Add New Todo</mat-card-title>
-      <mat-card-content class="flex-col" >
-
-        <div class="flex-row gap-10 flex-wrap">
-          <mat-form-field class="input-field">
-            <mat-label>Name</mat-label>
-            <input matInput data-test="todoOwner" placeholder="Filter by name"
-            [(ngModel)]="todoOwner" (input)="getTodosFromServer()">
-            <mat-hint></mat-hint>
-          </mat-form-field>
-
-          <mat-form-field class="input-field">
-            <mat-label>Body</mat-label>
-            <input matInput data-test="todoBody" placeholder="Filter by body contents"
-            [(ngModel)]="todoBody" (input)="updateFilter()">
-            <mat-hint></mat-hint>
-          </mat-form-field>
-
-
-        </div>
-
-        <div class="flex-row gap-10 flex-wrap">
-
-          <mat-form-field class="input-field">
-            <mat-label>Category</mat-label>
-            <mat-select (selectionChange)="updateFilter()" [(ngModel)]="todoCategory" data-test="todoCategory">
-              <mat-option>--</mat-option>
-              <mat-option value="video games">Video Games</mat-option>
-              <mat-option value="software development">Software Development</mat-option>
-            </mat-select>
-            <mat-hint></mat-hint>
-          </mat-form-field>
-        </div>
-      </mat-card-content>
-
-      <mat-card-actions align="start">
-        <button
-          mat-button
-          type="button"
-          color="primary"
-
-          type="submit"
-          data-test="confirmAddUserButton"
-        >
-          ADD USER
-        </button>
-      </mat-card-actions>
-
-    </mat-card>
-  </div>
+  <app-add-todo />
 
 </div>
 
