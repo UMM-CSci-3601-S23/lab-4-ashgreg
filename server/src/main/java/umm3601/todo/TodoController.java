@@ -2,6 +2,7 @@ package umm3601.todo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
 import static com.mongodb.client.model.Filters.and;
@@ -61,6 +62,34 @@ public class TodoController {
     // Combine the list of filters into a single filtering document.
     Bson combinedFilter = filters.isEmpty() ? new Document() : and(filters);
     return combinedFilter;
+  }
+
+  public void addNewTodo(Context ctx) {
+    /*
+     * The follow chain of statements uses the Javalin validator system
+     * to verify that instance of `Todo` provided in this context is
+     * a "legal" todo. It checks the following things (in order):
+     *    - The todo has a value for the name (`todo.name != null`)
+     *    - The todo name is not blank (`todo.name.length > 0`)
+     *    - The provided email is valid (matches EMAIL_REGEX)
+     *    - The provided age is > 0
+     *    - The provided role is valid (one of "admin", "editor", or "viewer")
+     *    - A non-blank company is provided
+     */
+    Todo newTodo = ctx.bodyValidator(Todo.class)
+      .check(todo -> todo.owner != null && todo.owner.length() > 0, "Todo must have a non-empty todo owner")
+      .check(todo -> todo.body != null && todo.body.length() > 0, "Todo must have a non-empty todo body")
+      .check(todo -> todo.category != null && todo.category.length() > 0, "Todo must have a non-empty todo category")
+      .get();
+
+    todoCollection.insertOne(newTodo);
+
+    ctx.json(Map.of("id", newTodo._id));
+    // 201 is the HTTP code for when we successfully
+    // create a new resource (a todo in this case).
+    // See, e.g., https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
+    // for a description of the various response codes.
+    ctx.status(HttpStatus.CREATED);
   }
 
   private Bson constructSortingOrder(Context ctx) {

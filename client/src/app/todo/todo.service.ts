@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Todo } from './todo';
 
@@ -65,4 +65,11 @@ export class TodoService {
 
     return filteredTodos;
   }
+
+  addTodo(newTodo: Todo): Observable<string> {
+    // Send post request to add a new todo with the todo data as the body.
+    return this.httpClient.post<{id: string}>(this.todoUrl, newTodo).pipe(map(res => res.id));
+  }
+
+
 }
