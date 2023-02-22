@@ -3,6 +3,7 @@ package umm3601.todo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Pattern;
 import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.regex;
@@ -13,6 +14,7 @@ import org.bson.conversions.Bson;
 import org.mongojack.JacksonMongoCollection;
 
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Sorts;
 
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
@@ -32,7 +34,7 @@ public class TodoController {
 
   public void getTodos(Context ctx) {
     Bson combinedFilter = constructFilter(ctx);
-    // Bson sortingOrder = constructSortingOrder(ctx);
+    Bson sortingOrder = constructSortingOrder(ctx);
 
     // All three of the find, sort, and into steps happen "in parallel" inside the
     // database system. So MongoDB is going to find the todos with the specified
@@ -40,7 +42,7 @@ public class TodoController {
     // results into an initially empty ArrayList.
     ArrayList<Todo> matchingTodos = todoCollection
       .find(combinedFilter)
-      //.sort(sortingOrder)
+      .sort(sortingOrder)
       .into(new ArrayList<>());
 
     // Set the JSON body of the response to be the list of todos returned by the database.
@@ -90,4 +92,12 @@ public class TodoController {
     ctx.status(HttpStatus.CREATED);
   }
 
+  private Bson constructSortingOrder(Context ctx) {
+    // Sort the results. Use the `sortby` query param (default "name")
+    // as the field to sort by, and the query param `sortorder` (default
+    // "asc") to specify the sort order.
+    String sortBy = Objects.requireNonNullElse(ctx.queryParam("sortby"), "owner");
+    Bson sortingOrder = Sorts.ascending(sortBy);
+    return sortingOrder;
+  }
 }
