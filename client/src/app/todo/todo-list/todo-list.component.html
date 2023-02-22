@@ -57,3 +57,6 @@
 <div class="todo-cards-container">
   <app-todo-card *ngFor="let todo of filteredTodos" class="todo-card" [todo]="todo" fxFlex="1 1 280px"></app-todo-card>
 </div>
+<div *ngIf="!filteredTodos.length">
+  <h2>No Todos Returned, Loosen Filter Requirements</h2>
+</div>
