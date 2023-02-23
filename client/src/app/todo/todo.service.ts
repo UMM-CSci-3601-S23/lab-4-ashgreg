@@ -43,7 +43,7 @@ export class TodoService {
     return this.httpClient.get<Todo[]>(this.todoUrl, { params: httpParams });
   }
 
-  filterTodos(todos: Todo[], filters: { limit?: number; body?: string; status?: string }): Todo[] {
+  filterTodos(todos: Todo[], filters: { limit?: number; body?: string; status?: string; category?: string }): Todo[] {
     let filteredTodos = todos;
 
     if (filters.limit) {
@@ -61,6 +61,9 @@ export class TodoService {
       else if (filters.status === 'todo') {
         filteredTodos = filteredTodos.filter(todo => !todo.status);
       }
+    }
+    if (filters.category) {
+      filteredTodos = filteredTodos.filter(todo => todo.category.toLowerCase().indexOf(filters.category.toLowerCase()) !== -1);
     }
 
     return filteredTodos;
