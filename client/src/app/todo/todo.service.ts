@@ -71,5 +71,7 @@ export class TodoService {
     return this.httpClient.post<{id: string}>(this.todoUrl, newTodo).pipe(map(res => res.id));
   }
 
-
+  deleteTodo(todo: Todo): void {
+    this.httpClient.delete(this.todoUrl, { params: { id: todo._id } }).subscribe();
+  }
 }
