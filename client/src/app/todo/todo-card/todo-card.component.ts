@@ -12,7 +12,7 @@ export class TodoCardComponent {
 
   @Output() deleteTodo = new EventEmitter<Todo>();
 
-  constructor(private todoService: TodoService) {
+  constructor() {
   }
 
   clicked(): void {

@@ -19,6 +19,8 @@ import { TodoListComponent } from './todo-list.component';
 import { TodoCardComponent } from '../todo-card/todo-card.component';
 import { TodoService } from '../todo.service';
 import { MockTodoService } from 'src/testing/todo.service.mock';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 const COMMON_IMPORTS: any[] = [
   MatCardModule,
@@ -26,6 +28,7 @@ const COMMON_IMPORTS: any[] = [
   MatSelectModule,
   MatOptionModule,
   MatButtonModule,
+  MatDialogModule,
   MatInputModule,
   MatExpansionModule,
   MatTooltipModule,
@@ -46,10 +49,11 @@ describe('TodoListComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [COMMON_IMPORTS],
-      declarations: [TodoListComponent, TodoCardComponent],
+      declarations: [TodoListComponent, TodoCardComponent, ConfirmDialogComponent],
       // providers:    [ UserService ]  // NO! Don't provide the real service!
       // Provide a test-double instead
-      providers: [{ provide: TodoService, useValue: new MockTodoService() }]
+      providers: [{ provide: TodoService, useValue: new MockTodoService() }, {provide : MAT_DIALOG_DATA,
+        useValue : {}}, {provide: MatDialogRef, useValue: {}},]
     });
   });
 
