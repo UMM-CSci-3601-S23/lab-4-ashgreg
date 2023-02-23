@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { Todo } from '../todo';
 import { TodoService } from '../todo.service';
 
@@ -10,6 +10,8 @@ import { TodoService } from '../todo.service';
 export class TodoCardComponent {
   @Input() todo: Todo;
 
+  @Output() deleteTodo = new EventEmitter<Todo>();
+
   constructor(private todoService: TodoService) {
   }
 
@@ -18,6 +20,6 @@ export class TodoCardComponent {
   }
 
   delete(): void {
-    this.todoService.deleteTodo(this.todo);
+    this.deleteTodo.emit(this.todo);
   }
 }

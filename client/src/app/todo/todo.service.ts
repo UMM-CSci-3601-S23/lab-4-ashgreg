@@ -71,7 +71,7 @@ export class TodoService {
     return this.httpClient.post<{id: string}>(this.todoUrl, newTodo).pipe(map(res => res.id));
   }
 
-  deleteTodo(todo: Todo): void {
-    this.httpClient.delete(this.todoUrl + '/' + todo._id ).subscribe();
+  deleteTodo(todo: Todo): Observable<boolean> {
+    return this.httpClient.delete(this.todoUrl + '/' + todo._id ).pipe(map(res => false));
   }
 }

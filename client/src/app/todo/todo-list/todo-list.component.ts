@@ -49,6 +49,18 @@ export class TodoListComponent implements OnInit, OnDestroy {
       this.serverFilteredTodos, { limit: this.maxResponseLimit, body: this.todoBody, status: this.statusFilter });
   }
 
+  public deleteTodo(todo: Todo) {
+    this.todoService.deleteTodo(todo).subscribe({
+      next: (newID) => {
+        this.getTodosFromServer();
+      },
+      error: err => {
+        this.getTodosFromServer();
+      },
+      // complete: () => console.log('Add todo completes!')
+    });
+  }
+
   /**
    * Starts an asynchronous operation to update the users list
    *
