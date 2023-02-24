@@ -6,18 +6,22 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
 import static com.mongodb.client.model.Filters.and;
+import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.regex;
 
 import org.bson.Document;
 import org.bson.UuidRepresentation;
 import org.bson.conversions.Bson;
+import org.bson.types.ObjectId;
 import org.mongojack.JacksonMongoCollection;
 
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Sorts;
+import com.mongodb.client.result.DeleteResult;
 
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
+import io.javalin.http.NotFoundResponse;
 
 public class TodoController {
 
@@ -99,5 +103,23 @@ public class TodoController {
     String sortBy = Objects.requireNonNullElse(ctx.queryParam("sortby"), "owner");
     Bson sortingOrder = Sorts.ascending(sortBy);
     return sortingOrder;
+  }
+
+  /**
+   * Delete the todo specified by the `id` parameter in the request.
+   *
+   * @param ctx a Javalin HTTP context
+   */
+  public void deleteTodo(Context ctx) {
+    String id = ctx.pathParam("id");
+    DeleteResult deleteResult = todoCollection.deleteOne(eq("_id", new ObjectId(id)));
+    if (deleteResult.getDeletedCount() != 1) {
+      ctx.status(HttpStatus.NOT_FOUND);
+      throw new NotFoundResponse(
+        "Was unable to delete ID "
+          + id
+          + "; perhaps illegal ID or an ID for an item not in the system?");
+    }
+    ctx.status(HttpStatus.OK);
   }
 }

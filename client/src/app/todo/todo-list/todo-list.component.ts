@@ -1,9 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { max, Subject, takeUntil } from 'rxjs';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { Todo } from '../todo';
 import { TodoService } from '../todo.service';
+
 
 @Component({
   selector: 'app-todo-list',
@@ -26,7 +29,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
 
   private ngUnsubscribe = new Subject<void>();
 
-  constructor(private todoService: TodoService, private snackBar: MatSnackBar) {
+  constructor(private todoService: TodoService, private snackBar: MatSnackBar, public dialog: MatDialog) {
     // Nothing here – everything is in the injection parameters.
   }
 
@@ -47,6 +50,26 @@ export class TodoListComponent implements OnInit, OnDestroy {
   public updateFilter(): void {
     this.filteredTodos = this.todoService.filterTodos(
       this.serverFilteredTodos, { limit: this.maxResponseLimit, body: this.todoBody, status: this.statusFilter });
+  }
+
+  public deleteTodo(todo: Todo) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: false
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.todoService.deleteTodo(todo).subscribe({
+          next: (newID) => {
+            this.getTodosFromServer();
+          },
+          error: err => {
+            this.getTodosFromServer();
+          },
+          // complete: () => console.log('Add todo completes!')
+        });
+      }
+    });
   }
 
   /**

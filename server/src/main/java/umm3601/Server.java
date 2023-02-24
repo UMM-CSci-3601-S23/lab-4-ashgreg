@@ -81,6 +81,8 @@ public class Server {
 
     server.post("/api/todos", todoController::addNewTodo);
 
+    server.delete("/api/todos/{id}", todoController::deleteTodo);
+
     // This catches any uncaught exceptions thrown in the server
     // code and turns them into a 500 response ("Internal Server
     // Error Response"). In general you'll like to *never* actually

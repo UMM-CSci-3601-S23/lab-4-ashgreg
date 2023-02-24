@@ -1,3 +1,9 @@
 .todo-card {
   width: 50%;
 }
+
+.todo-card-inner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

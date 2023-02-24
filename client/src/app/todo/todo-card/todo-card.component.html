@@ -1,11 +1,20 @@
 <mat-card class="todo-card" *ngIf="this.todo">
-  <mat-checkbox ngDefaultControl class="example-margin" [(ngModel)]="this.todo.status" (ngModelChange)="clicked" class="todo-card-check">
-    <mat-card-header class="todo-card-header">
+  <div class="todo-card-inner">
+    <mat-checkbox ngDefaultControl class="example-margin" [(ngModel)]="this.todo.status" (ngModelChange)="clicked" class="todo-card-check"></mat-checkbox>
+    <div style="width: 90%">
+      <mat-card-header class="todo-card-header">
         <mat-card-title class="todo-card-category">{{ this.todo.category }}</mat-card-title>
         <mat-card-subtitle class="todo-card-owner">{{ this.todo.owner }}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content class="todo-card-content todo-card-body">
+      </mat-card-header>
+      <mat-card-content class="todo-card-content todo-card-body">
         {{ this.todo.body }}
-    </mat-card-content>
-  </mat-checkbox>
+      </mat-card-content>
+    </div>
+    <div class="example-button-container">
+      <button mat-mini-fab color="primary" aria-label="Remove todo" (click)="delete()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+
 </mat-card>

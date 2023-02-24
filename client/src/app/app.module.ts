@@ -37,11 +37,14 @@ import { TodoCardComponent } from './todo/todo-card/todo-card.component';
 import { TodoListComponent } from './todo/todo-list/todo-list.component';
 import { CommonModule } from '@angular/common';
 import { AddTodoComponent } from './todo/add-todo/add-todo.component';
+import { ConfirmDialogComponent } from './todo/confirm-dialog/confirm-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const MATERIAL_MODULES: any[] = [
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
+  MatDialogModule,
   MatDividerModule,
   MatExpansionModule,
   MatFormFieldModule,
@@ -71,6 +74,7 @@ const MATERIAL_MODULES: any[] = [
     TodoCardComponent,
     TodoListComponent,
     AddTodoComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,

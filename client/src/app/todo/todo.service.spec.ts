@@ -172,4 +172,38 @@ describe('TodoService', () => {
       });
     });
   });
+
+  describe('When addTodo() is called it correctly forms the HTTP request', () => {
+    it('correctly calls api/todos with the todo data as parameters', () => {
+        const mockedMethod = spyOn(httpClient, 'post').and.returnValue(of(testTodos));
+
+        todoService.addTodo(testTodos[0]).subscribe((_) => {
+
+          expect(mockedMethod)
+            .withContext('one call')
+            .toHaveBeenCalledTimes(1);
+
+          expect(mockedMethod)
+            .withContext('talks to the correct endpoint')
+            .toHaveBeenCalledWith(todoService.todoUrl, testTodos[0]);
+        });
+    });
+  });
+
+  describe('When deleteTodo() is called it correctly forms the HTTP request', () => {
+    it('correctly calls api/todos with the todo data as parameters', () => {
+        const mockedMethod = spyOn(httpClient, 'delete').and.returnValue(of(testTodos));
+
+        todoService.deleteTodo(testTodos[0]).subscribe((_) => {
+
+          expect(mockedMethod)
+            .withContext('one call')
+            .toHaveBeenCalledTimes(1);
+
+          expect(mockedMethod)
+            .withContext('talks to the correct endpoint')
+            .toHaveBeenCalledWith(todoService.todoUrl + '/' + testTodos[0]._id);
+        });
+    });
+  });
 });
